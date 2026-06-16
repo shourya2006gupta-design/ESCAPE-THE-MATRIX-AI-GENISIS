@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave The Matrix</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+    <!-- START SCREEN -->
+    <div class="start-screen" id="startScreen">
+        <h1>LEAVE THE MATRIX</h1>
+        <p>A student portal accidentally created life.</p>
+        <button id="gameStart">LEAVE</button>
+        <button onclick="skipToLecture()">Skip</button>
+    </div>
+
+
+    <!-- LOADING SCREEN -->
+    <div class="loading-screen hidden" id="loadingScreen">
+        <div id="bootText"></div>
+    </div>
+
+
+    <!-- CHARACTER SCREEN -->
+    <div class="character-screen hidden" id="characterScreen">
+        <div class="dialoguebox">
+            <div class="dialogue" id="dialogue"></div>
+            <div id="nextIndicator" class="next-indicator hidden">
+                ▼
+                <div class="continue-text">
+                    Click anywhere to continue
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LECTURE SCREEN -->
+    <div class="lecture-screen hidden" id="lectureScreen">
+    </div>
+    
+    <div class="enrolled-screen hidden" id="enrolledScreen">
+        <img id="enrolledphotobg" class="enrolledphotobg" src="enrolledbg.jpg">
+    </div>
+
+    <!-- BLUE TRANSITION -->
+    <div class="blue-transition hidden" id="blueTransition"></div>
+
+    <!-- white TRANSITION -->
+    <div class="white-transition hidden" id="whiteTransition"></div>
+
+
+    <!-- CHARACTER -->
+    <div class="character hidden" id="character">
+            <div id="characterHead">:)</div>
+            /|\
+            <br>
+            / \
+    </div>
+
+
+    <!-- NARRATOR DIALOGUE'S BOX -->
+    <div id="narratorBox" class="narrator-box hidden"></div>
+
+
+    <!-- CHARACTER/ENTITY DIALOGUE'S BOX -->
+    <div id="entityBox" class="entity-box hidden"></div>
+
+
+    <!-- GAME'S MCQ -->
+    <div id="choiceScreen" class="choice-screen hidden"></div>
+
+
+    <!-- GAME LOST -->
+    <div id="gameOverScreen" class="gameover hidden">
+        <h1>GAME OVER</h1>
+        <p id="gameOverReason"></p>
+        <button onclick="restartCheckpoint()">Retry</button>
+    </div>
+
+
+    <!-- JAVA SCRIPT LINKED -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

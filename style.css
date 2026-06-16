@@ -1,0 +1,427 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+body {
+    background: #0f172a;
+    color: white;
+    font-family: Consolas, monospace;
+    min-height: 100vh;
+}
+
+/* All buttons in the page */
+button {
+    padding: 12px 24px;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #7b8291;
+}
+
+/* class to control the display */
+.hidden {
+    display: none !important;
+}
+
+.absolute {
+    position: absolute;
+}
+
+/* NARRATOR'S DIALOGUE BOX / CAPTIAN */
+.narrator-box {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    max-width: 700px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    text-align: center;
+    transition: opacity .3s ease;
+    z-index: 50;
+}
+
+/* CHARACTER FOR WHOLE GAME */
+.character {
+    transition: all .6s ease;
+    font-size: 3rem;
+}
+
+.characterFloat{
+animation: float 2s infinite ease-in-out;
+}
+
+/* CHARACTER'S DIALOGUE BOX RIGHT */
+.entity-boxright::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -15px;
+    transform: rotate(130deg);
+    border-left: 18px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 25px solid rgb(155, 152, 152);
+}
+
+/* CHARACTER'S DIALOGUE BOX LEFTT */
+.entity-boxleft::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    transform: rotate(120deg);
+    border-left: 18px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 25px solid rgb(155, 152, 152);
+}
+
+/* CHARACTER'S DIALOGUE BOX DESIGN */
+.entity-box {
+    margin-right: 15px;
+    margin-left: 15px;
+    overflow: visible;
+    z-index: 1000;
+    max-width: 300px;
+    margin-top: 60px;
+    position: absolute;
+    min-width: 100px;
+    width: fit-content;
+    height: fit-content;
+    font-size: 0.8rem !important;
+    padding: 12px 13px;
+    background: rgb(155, 152, 152);
+    transform-origin: bottom center;
+    color: rgb(255, 255, 255);
+    border-radius: 12px;
+}
+
+/* START SCREEN */
+.start-screen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.start-screen h1 {
+    font-size: 6rem;
+}
+
+.start-screen p {
+    color: #94a3b8;
+}
+
+/* LOADING SCREEN*/
+.loading-screen {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+}
+
+#bootText {
+    width: 300px;
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+/* FLOAT ANIMATION FOR LOADING PAGE CHARACTER */
+@keyframes float {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* CHARACTER SCREEN */
+.character-screen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* INTRO DIALOGUE */
+.dialogue {
+    width: 500px;
+    min-height: 120px;
+    text-align: center;
+    line-height: 1;
+    font-size: 1.3rem;
+}
+
+.dialoguebox {
+    position: relative;
+}
+
+.next-indicator {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.next-indicator {
+    position: absolute;
+    bottom: 0px;
+    left: 28%;
+    text-align: center;
+    animation: bounce 1.2s infinite;
+}
+
+.continue-text {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-top: 5px;
+    letter-spacing: 1px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.next-indicator {
+    animation: bounce 1.2s infinite;
+}
+
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* FOR LOADING PAGE WARNING SHAKE */
+.shake {
+    animation: shake .4s;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* CHARACTER DIALOGUE BOX POP */
+.boxpop {
+    animation: boxpop 200ms ease 0s 1;
+}
+
+@keyframes boxpop {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* MCQ SCREEN */
+.choice-screen {
+    position: absolute;
+    inset: 0;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* GAME END SCENE */
+.gameover {
+    position: absolute;
+    inset: 0;
+    z-index: 1002;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* BLUE SCREEN TRANSITION FOR LECTURE VIDEO*/
+.blue-transition {
+    position: fixed;
+    inset: 0;
+    background: #3bc3e2;
+    z-index: 1000;
+    animation: blueFlash 4s ease-in-out forwards;
+}
+
+@keyframes blueFlash {
+    0% {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* LECTURE SCREEN */
+.lecture-screen {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+/* VIDEO OVERLAY BELOW , FULL SCREEN */
+.lectureVideo {
+    /* height: 100vh; */
+    width:100vw;
+    
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* VIDEO OVERLAY FRONT ONLY GAME PART */
+.lectureVideo1 {
+    /* height: 100vh; */
+    width:100vw;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    clip-path: inset(0 18.5% 0 0);
+    z-index: 3;
+}
+
+/* CHARACTER POSITIOING */
+.zindex {
+    z-index: 2;
+    bottom: 100px;
+}
+
+/* CHARACTER PEEKS FROM VIDEO'S BACK */
+.peekanimation {
+    animation: peek 1s ease-in-out 0s 1;
+}
+
+@keyframes peek {
+    0% {
+        transform: translateX(0px) rotate(40deg);
+    }
+
+    50% {
+        transform: translateX(100px) rotate(40deg);
+    }
+
+    100% {
+        transform: translateX(0px) rotate(40deg);
+    }
+}
+
+
+/* BLUE SCREEN TRANSITION FOR LECTURE VIDEO*/
+.white-transition {
+    position: fixed;
+    inset: 0;
+    background: #ffffff;
+    z-index: 2000;
+    animation: whiteFlash 4s ease-in-out forwards;
+}
+
+@keyframes whiteFlash {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.enrolled-screen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.enrolledphotobg {
+    /* height: 100vh; */
+    width: 100vw;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    z-index: 1;
+    /* top: 0px; */
+}
+
+.characterDamage{
+    animation: colorchange 30s ease-in-out 0s 1;
+}
+
+
+@keyframes colorchange {
+    0% {
+        color: red;
+    }
+    100% {
+        color: black;
+    }
+}
