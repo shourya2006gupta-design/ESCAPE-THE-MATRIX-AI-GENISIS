@@ -54,19 +54,24 @@ button:hover {
 .character {
     transition: all .6s ease;
     font-size: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.characterFloat{
-animation: float 2s infinite ease-in-out;
+.characterFloat {
+    animation: float 2s infinite ease-in-out;
 }
 
 /* CHARACTER'S DIALOGUE BOX RIGHT */
 .entity-boxright::after {
     content: "";
     position: absolute;
+    width: 0;
+    height: 0;
     top: -10px;
     left: -15px;
-    transform: rotate(130deg);
+    transform: rotate(129deg);
     border-left: 18px solid transparent;
     border-right: 10px solid transparent;
     border-top: 25px solid rgb(155, 152, 152);
@@ -115,7 +120,7 @@ animation: float 2s infinite ease-in-out;
 }
 
 .start-screen h1 {
-    font-size: 6rem;
+    font-size: 4rem;
 }
 
 .start-screen p {
@@ -197,6 +202,7 @@ animation: float 2s infinite ease-in-out;
     animation: pulse 2s infinite;
 }
 
+/* CHARACTER SCREEN TEXT CLICK TO CONTINUE ANIMATION */
 @keyframes pulse {
 
     0%,
@@ -213,7 +219,9 @@ animation: float 2s infinite ease-in-out;
     animation: bounce 1.2s infinite;
 }
 
+/* CHARACTER SCREEN TEXT CLICK TO CONTINUE ANIMATION */
 @keyframes bounce {
+
     0%,
     100% {
         transform: translateY(0);
@@ -271,7 +279,7 @@ animation: float 2s infinite ease-in-out;
 .choice-screen {
     position: absolute;
     inset: 0;
-    z-index: 1001;
+    z-index: 11001;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -284,7 +292,7 @@ animation: float 2s infinite ease-in-out;
 .gameover {
     position: absolute;
     inset: 0;
-    z-index: 1002;
+    z-index: 11002;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -330,8 +338,8 @@ animation: float 2s infinite ease-in-out;
 /* VIDEO OVERLAY BELOW , FULL SCREEN */
 .lectureVideo {
     /* height: 100vh; */
-    width:100vw;
-    
+    width: 100vw;
+
     position: absolute;
     z-index: 1;
     top: 50%;
@@ -341,7 +349,7 @@ animation: float 2s infinite ease-in-out;
 /* VIDEO OVERLAY FRONT ONLY GAME PART */
 .lectureVideo1 {
     /* height: 100vh; */
-    width:100vw;
+    width: 100vw;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -394,6 +402,7 @@ animation: float 2s infinite ease-in-out;
     }
 }
 
+/* CONTAINER FOR IMAGE OF ENROLLED SCREEN */
 .enrolled-screen {
     height: 100vh;
     display: flex;
@@ -402,26 +411,233 @@ animation: float 2s infinite ease-in-out;
     align-items: center;
     position: relative;
 }
+
+/* BACKGROUND OF ENLROLLED SCREEN */
 .enrolledphotobg {
-    /* height: 100vh; */
     width: 100vw;
     top: 50%;
     transform: translateY(-50%);
     position: absolute;
     z-index: 1;
-    /* top: 0px; */
 }
 
-.characterDamage{
+/* BLAST AT VIDEO DAMAGE */
+.characterDamage {
     animation: colorchange 30s ease-in-out 0s 1;
 }
 
-
 @keyframes colorchange {
     0% {
-        color: red;
+        color: rgb(255, 0, 0);
     }
+
     100% {
         color: black;
+    }
+}
+
+/* LOOKING AROUND NECK ROTATION */
+.headrotate {
+    animation: headrotate 2.5s ease-in-out 0s 2;
+}
+
+@keyframes headrotate {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    25% {
+        transform: rotateY(60deg);
+    }
+
+    75% {
+        transform: rotateY(-60deg);
+    }
+
+    100% {
+        transform: rotateY(0deg);
+    }
+}
+
+/* MAIN CONTAINER FOR IMAGE OF DASBOARD SCREEN AND PROFILE SCREEN */
+.dashboard-screen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* BACKGROUND OF DASHBOARD SCREEN */
+.dashboardphotobg {
+    width: 100vw;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    z-index: 1;
+}
+
+/* TEXT ABOVE CHARACTER */
+.shourya-text {
+    font-size: 1rem !important;
+    display: flex;
+    color: #3bc3e2;
+    align-items: center;
+    text-align: center;
+    /*  */
+    /*  */
+    animation: falltext 1s ease-in-out 0s 1;
+}
+
+@keyframes falltext {
+    0% {
+        transform: translateY(-200px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* CHARACTER SOINING TO TRANFORM IDENTITY */
+.rotationShaktiman {
+    animation: Srotation 0.2s ease-in-out 0s 12;
+}
+
+@keyframes Srotation {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(180deg);
+    }
+}
+
+/* URGENT RED LIGHT BLINK */
+.urgent {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    animation: urgentFeel 3s ease-in-out infinite;
+}
+
+@keyframes urgentFeel {
+    0% {
+        background-color: rgba(255, 0, 0, 0.486);
+    }
+
+    100% {
+        background-color: rgba(255, 0, 0, 0);
+    }
+}
+
+/* FINAL SCENE POP UP MESSAGE OF PROFILE DELETE */
+.delete-profile-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #3b3b3b;
+    border: 2px solid #8da2a7;
+    border-radius: 12px;
+    padding: 25px 40px;
+    text-align: center;
+    z-index: 99999;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.delete-profile-box h2 {
+    margin-bottom: 10px;
+    color: #ff4d4d;
+}
+
+.delete-profile-box p {
+    color: white;
+}
+
+/* DELETE PROFFILE BOX KICK */
+.kicked-away {
+    animation: panicThrow .8s ease-out forwards;
+}
+
+@keyframes panicThrow {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translate(-120vw, 60vh) rotate(-1080deg);
+
+        opacity: 0;
+    }
+}
+
+/* LAST SCENE INDIAN SERIAL FALL */
+.dizzyFall {
+    animation: dizzyFall 2.5s ease-in forwards;
+    transform-origin: center bottom;
+}
+
+@keyframes dizzyFall {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    10% {
+        transform: rotate(5deg);
+    }
+
+    20% {
+        transform: rotate(-5deg);
+    }
+
+    30% {
+        transform: rotate(5deg);
+    }
+
+    40% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+
+    60% {
+        transform: rotate(-5deg);
+    }
+
+    70% {
+        transform: rotate(30deg);
+    }
+
+    80% {
+        transform:
+            translateX(-10px) rotate(50deg);
+    }
+
+    100% {
+        transform:
+            translateX(-60px) rotate(90deg);
+    }
+}
+
+/* IN TESTING NEXT PART */
+.fall {
+    animation: fall .8s ease-out forwards;
+}
+
+@keyframes fall {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translateY(5000px)
     }
 }
