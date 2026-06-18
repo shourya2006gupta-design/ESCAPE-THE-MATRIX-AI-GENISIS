@@ -11,6 +11,7 @@ const characterScreen = document.getElementById("characterScreen");
 const lectureScreen = document.getElementById("lectureScreen");
 const enrolledScreen = document.getElementById("enrolledScreen");
 const dashboardScreen = document.getElementById("dashboardScreen");
+const endScreen = document.getElementById("endScreen");
 
 // CHARACTER VARIABLE
 const character = document.getElementById("character");
@@ -232,15 +233,25 @@ characterScreen.addEventListener("click", (e) => {
     }
 });
 
-// temporary button to skip 
-function skipToLecture() {
-    startScreen.classList.add("hidden");
-    loadingScreen.classList.add("hidden");
-    characterScreen.classList.add("hidden");
-    question1ans();
-    // dashboardScreenaction();
-    // startLectureScene()
-    // document.documentElement.requestFullscreen();
+    // Dashboard already modified
+    dashboardphotobg.src = "dashboard without name.png";
+
+    // Show profile name
+    shouryaText.classList.remove("hidden");
+    shouryaText.classList.add("absolute");
+
+    if (!character.contains(shouryaText)) {
+        character.prepend(shouryaText);
+    }
+
+    // Show delete box
+    // deleteProfileBox.classList.remove("hidden");
+
+    // Jump to Question 5
+    setTimeout(() => {
+        checkpoint = checkpointQuestion5;
+        checkpointQuestion5();
+    }, 500);
 }
 
 // FUNCTION TO GENRATE MCQ
@@ -711,13 +722,13 @@ function question3ans() {
     setTimeout(entity, 9000, "We are meeting for first time ");
     setTimeout(narrator, 14000, "WHAT ARE YOU TRYING TO DO");
     setTimeout(narrator, 19000, "IT'S  NOT LIKE I WILL NOT IDENTIFY YOU IF CHANGE YOUR NAME ");
-    
+
     setTimeout(() => {
         narrator(" I AM CALLING THE ADMIMINSTRATOR ");
         deleteProfileBox.classList.remove("hidden");
         urgent.classList.remove("hidden");
     }, 22000);
-    
+
     setTimeout(entity, 24000, " what's this. ");
     setTimeout(entity, 29000, " i am not liking this ");
     setTimeout(narrator, 34000, " WHAT!! you took my name from there and system is deleting my profile ");
@@ -893,48 +904,57 @@ function question5ans() {
 
     character.style.left = rect.right / 2 - character.offsetWidth * 0.5 + "px";
 
-    let textRect = shouryaText.getBoundingClientRect();
-
-    document.body.appendChild(shouryaText);
-
-    // shouryaText.style.position = "fixed";
 
     setTimeout(entity, 1000, "I am starting feeling dizzy.");
     setTimeout(entity, 2000, "I am dying with this website.");
 
     setTimeout(() => {
-
         character.classList.add("dizzyFall");
+    }, 2500);
 
-        // Current screen position of the text
-        const textRect = shouryaText.getBoundingClientRect();
-        const dashboardRect = dashboardScreen.getBoundingClientRect();
-
-        // Move text out of character
-        document.body.appendChild(shouryaText);
-
+    setTimeout(() => {
+        let textRect = shouryaText.getBoundingClientRect();
+        document.body.prepend(shouryaText);
         shouryaText.classList.remove("hidden");
-
-        shouryaText.style.position = "fixed";
-        shouryaText.style.zIndex = "11100";
-
-        // Freeze exactly where it currently is
         shouryaText.style.left = textRect.left + "px";
         shouryaText.style.top = textRect.top + "px";
+        shouryaText.style.transform = 'rotate(90deg)';
+        shouryaText.style.zIndex = "11100";
+    }, 5200);
 
-        shouryaText.style.transition =
-            "top 2s ease-in, left 2s ease-in, transform 2s ease-in";
+    setTimeout(() => {
+        shouryaText.style.transition = "all 1s ease-in";
+        const textRect = shouryaText.getBoundingClientRect();
+        const dashboardRect = dashboardScreen.getBoundingClientRect();
+        shouryaText.style.top = dashboardRect.bottom - textRect.height + "px";
+        shouryaText.style.left = textRect.left + "px";
+        shouryaText.style.transform = "rotate(90deg)";
+        urgent.classList.add('hidden')
+    }, 7000);
 
-        requestAnimationFrame(() => {
-
-            shouryaText.style.top =
-                dashboardRect.bottom - shouryaText.offsetHeight + "px";
-
-
-            shouryaText.style.left = textRect.left - 40 + "px";
-
-            shouryaText.style.transform = "rotate(-60deg)";
-        });
-
-    }, 3000);
+    setTimeout(() => {
+        setTimeout(entity, 1000, "why its so quiet");
+        setTimeout(entity, 1000, "am i dead");
+        setTimeout(entity, 1000, "ahh! that name also fell down whem i fell, are we safe, now");
+        setTimeout(narrator, 1000, "**door open**");
+        setTimeout(narrator, 1000, "thankyou thankyou...");
+        setTimeout(narrator, 1000, "hash! they have backu...");
+        setTimeout(narrator, 1000, "you already stopped the deletion. how?");
+        setTimeout(setCharacter, 1000, ":D","black");
+        setTimeout(entity, 1000, "i am not that special. i only needed my left hand to do it");
+        setTimeout(narrator, 1000, "i knew you were talented when you didnt knew who you are");
+        setTimeout(entity, 1000, "sorry,i was kidding");
+        setTimeout(entity, 1000, "can you please tell me what am i?");
+        setTimeout(narrator, 1000, "your right must know ask him, if not left one");
+        setTimeout(entity, 1000, "sorry for what all i did, please tell the truth ?");
+        setTimeout(narrator, 1000, "okay whatever, you are ....");
+        setTimeout(narrator, 1000, "a part of big webpage that i learnt from ai genisis");
+        setTimeout(narrator, 1000, "i also don't know much, mt techers can explain you better");
+        setTimeout(narrator, 1000, "i am also learning from them . you should also join our college");
+        setTimeout(narrator, 1000, "to learn together about all this ");
+        setTimeout(() => {
+            endScreen.classList.remove('hidden');
+            dashboardScreen.classList.add('hidden');
+        }, 3000);
+    }, 9000);
 }
