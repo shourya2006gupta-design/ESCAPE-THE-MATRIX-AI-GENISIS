@@ -16,7 +16,7 @@
         <h1>LEAVE THE MATRIX</h1>
         <p>A student portal accidentally created life.</p>
         <button id="gameStart">LEAVE</button>
-        <button onclick="skipToLecture()">Skip</button>
+        <button class="hidden" onclick="skipToLecture()">Skip</button>
     </div>
 
 
@@ -43,8 +43,14 @@
     <div class="lecture-screen hidden" id="lectureScreen">
     </div>
     
+    <!-- ENROLLED SCREEN -->
     <div class="enrolled-screen hidden" id="enrolledScreen">
         <img id="enrolledphotobg" class="enrolledphotobg" src="enrolledbg.jpg">
+    </div>
+
+    <!-- DASHBOARD SCREEN -->
+    <div class="dashboard-screen hidden" id="dashboardScreen">
+        <img id="dashboardphotobg" class="dashboardphotobg" src="dashboardbg.png">
     </div>
 
     <!-- BLUE TRANSITION -->
@@ -52,20 +58,37 @@
 
     <!-- white TRANSITION -->
     <div class="white-transition hidden" id="whiteTransition"></div>
-
-
+    
+    <!--URGENT RED LIGHT BLINK-->
+    <div class="urgent hidden" id="urgent"></div>
+    
+    <!-- FINAL SCENE POP UP MESSAGE OF PROFILE DELETE  -->
+    <div id="deleteProfileBox" class="delete-profile-box hidden">
+        <h2>Deleting Profile...</h2>
+        <p>Please wait.</p>
+    </div>
+    
+    <!-- TEXT ABOVE CHARACTER -->
+    <div class="shourya-text hidden" id="shouryaText">
+        Shourya Gupta <br> ▼
+    </div>
+    
+    
     <!-- CHARACTER -->
     <div class="character hidden" id="character">
-            <div id="characterHead">:)</div>
+        <div id="characterHead">:)</div>
+        <div id="characterBody">
             /|\
             <br>
             / \
+        </div>
     </div>
-
-
+    
+    
+    
     <!-- NARRATOR DIALOGUE'S BOX -->
     <div id="narratorBox" class="narrator-box hidden"></div>
-
+    
 
     <!-- CHARACTER/ENTITY DIALOGUE'S BOX -->
     <div id="entityBox" class="entity-box hidden"></div>
@@ -85,7 +108,7 @@
 
     <!-- JAVA SCRIPT LINKED -->
     <script src="script.js"></script>
-
+    
 </body>
 
 </html>
