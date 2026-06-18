@@ -115,7 +115,7 @@ function setCharacter(face, color) {
 }
 
 // TYPING EFFECT FOR LOADNG AND CHARACTER PAGE
-function playDialogue(messages, showContinue = true, container = dialogue, speed = 40, finished = null) {
+function playDialogue(messages, showContinue = true, container = dialogue, speed = 45, finished = null) {
     container.innerHTML = "";
     if (container === dialogue) {
         nextIndicator.classList.add("hidden");
@@ -194,9 +194,9 @@ function showCharacter() {
     characterScreen.classList.remove("hidden");
     setCharacter('"."', 'white')
     playDialogue([
-        "uh...",
+        "Uh...",
         "Where am I?",
-        "actually ,Who am I?",
+        "Actually, who am I?",
     ], true);
     stage = 1;
 }
@@ -209,14 +209,14 @@ characterScreen.addEventListener("click", (e) => {
     nextIndicator.classList.add("hidden");
 
     if (stage === 1) {
-        playDialogue(["hello?", "anybody here?",], true);
+        playDialogue(["Hello?", "Anybody here?",], true);
         stage = 2;
         return;
     }
 
     if (stage === 2) {
         playDialogue([
-            "why is everything blue?"
+            "Why is everything blue?"
         ], false)
         setTimeout(() => {
             blueTransition.classList.remove("hidden");
@@ -233,25 +233,40 @@ characterScreen.addEventListener("click", (e) => {
     }
 });
 
-    // Dashboard already modified
-    dashboardphotobg.src = "dashboard without name.png";
+// temporary button to skip 
+function skipToQuestion5() {
 
-    // Show profile name
-    shouryaText.classList.remove("hidden");
-    shouryaText.classList.add("absolute");
+    document.documentElement.requestFullscreen();
 
-    if (!character.contains(shouryaText)) {
-        character.prepend(shouryaText);
-    }
+    // Hide all previous screens
+    startScreen.classList.add("hidden");
+    loadingScreen.classList.add("hidden");
+    characterScreen.classList.add("hidden");
+    lectureScreen.classList.add("hidden");
 
-    // Show delete box
-    // deleteProfileBox.classList.remove("hidden");
+    // Reset character state
+    character.classList.remove(
+        "hidden",
+        "characterFloat",
+        "peekanimation",
+        "dizzyFall"
+    );
 
-    // Jump to Question 5
-    setTimeout(() => {
-        checkpoint = checkpointQuestion5;
-        checkpointQuestion5();
-    }, 500);
+    character.style.transition = "";
+    character.style.transform = "";
+    character.style.left = "";
+    character.style.top = "";
+
+    // Reset dialogue
+    clearDialogue();
+
+    // Make sure lecture isn't considered running
+    lectureStarted = true;
+
+    // Jump to the enrolled-screen aftermath
+    question1ans();
+
+
 }
 
 // FUNCTION TO GENRATE MCQ
@@ -373,6 +388,20 @@ function clearDialogue() {
     entityBox.textContent = "";
 }
 
+// CLEAR ENTITY DIALOGUES
+function clearEntityDialogue() {
+    entityBox.classList.remove("entity-boxleft");
+    entityBox.classList.remove("entity-boxright");
+    entityBox.classList.add("hidden");
+    entityBox.textContent = "";
+}
+
+// CLEAR narator DIALOGUES
+function clearNaratorDialogue() {
+    narratorBox.classList.add("hidden");
+    narratorBox.textContent = "";
+}
+
 // lecture scene character peeks for once
 function firstPeek() {
     lectureScreen.appendChild(character);
@@ -383,7 +412,7 @@ function firstPeek() {
     character.style.left = (rect.left + rect.width * 0.78 - character.offsetWidth) + "px";
     setTimeout(() => {
         character.classList.add("peekanimation");
-        setTimeout(narrator, 500, "wait... what was that?");
+        setTimeout(narrator, 500, "Wait... what was that?");
         setTimeout(secondPeek, 3100);
     }, 19000);
     // 19000
@@ -392,7 +421,7 @@ function firstPeek() {
 // lecture scene character peeks for second time
 function secondPeek() {
     character.classList.remove("peekanimation");
-    narrator("nah... i'm imagining things.");
+    narrator("Nah... I'm imagining things.");
     const rect = lectureVideo1.getBoundingClientRect();
     character.style.left = (rect.left + rect.width * 0.78 - character.offsetWidth) + "px";
     setTimeout(() => {
@@ -404,7 +433,7 @@ function secondPeek() {
 // lecture scene character come from the behind of the video
 function jumpOut() {
     narrator("WHAT THE—");
-    setTimeout(narrator, 1500, "I am sure! I saw something");
+    setTimeout(narrator, 1500, "I am sure! I saw something.");
     const rect = lectureVideo1.getBoundingClientRect();
     setTimeout(() => {
         character.style.left = (rect.right - character.offsetWidth * 2) + "px";
@@ -418,31 +447,27 @@ function jumpOut() {
 function startConversation() {
 
     setTimeout(narrator, 500, "How are you moving?");
-    setTimeout(entity, 1500, "good question.");
+    setTimeout(entity, 1500, "Good question.");
 
-    setTimeout(narrator, 3000, "who even are you?");
-    setTimeout(entity, 4500, "i have no idea.");
+    setTimeout(narrator, 3000, "Who even are you?");
+    setTimeout(entity, 4500, "I have no idea.");
 
-    setTimeout(narrator, 7000, "what do you mean by that?");
-    setTimeout(entity, 9500, "i was literally born 30 seconds ago.");
+    setTimeout(narrator, 7000, "What do you mean by that?");
+    setTimeout(entity, 9500, "I was literally born 30 seconds ago.");
 
-    setTimeout(narrator, 12000, "**phone ringing**");
-    setTimeout(narrator, 17000, "mom's calling me. I will be back soon");
-    setTimeout(entity, 18500, "cool.");
-    setTimeout(() => {
-        entityBox.classList.remove("entity-boxleft");
-        entityBox.classList.remove("entity-boxright");
-        entityBox.classList.add("hidden");
-    }, 20000);
+    setTimeout(clearEntityDialogue, 12000)
+    setTimeout(narrator, 12000, "**Phone ringing**");
+    setTimeout(narrator, 15000, "Mom's calling me. I'll be back soon.");
+    setTimeout(entity, 17500, "Cool.");
+    setTimeout(clearEntityDialogue, 19500)
 
-    setTimeout(narrator, 20000, "don't touch anything.");
-    setTimeout(narrator, 22000, "**He went out of the room**");
-    // 
-    // 
+    setTimeout(narrator, 19500, "Don't touch anything.");
+    setTimeout(narrator, 21500, "**He went out of the room**");
+
     setTimeout(() => {
         checkpoint = checkpointQuestion1
         checkpointQuestion1()
-    }, 23000);
+    }, 23500);
 }
 
 // LECTURE SCENE MCQ
@@ -452,16 +477,16 @@ function checkpointQuestion1() {
         "What should I do?",
         [
             "Jump back into the video.",
-            "Talk to instructor in the video.",
-            "do nothing eat 5 star.",
-            "blow it up!!"
+            "Talk to the instructor in the video.",
+            "Do nothing, eat 5 Star.",
+            "Blow it up!!"
         ],
         3,
         question1ans,
         [
-            "Its paused to solid wall",
-            "Felt like talkig to stone. It's a video",
-            "Waited too long ,laptop's battery is dead.",
+            "It's paused at a solid wall.",
+            "Felt like talking to a stone. It's just a video.",
+            "Waited too long, the laptop's battery is dead.",
             ""
         ],
         selectedOption1
@@ -486,7 +511,7 @@ function selectedOption1(index, callback) {
     setTimeout(() => {
         clearDialogue();
         callback();
-    }, 100);
+    }, 1);
 }
 
 // AFTERMATH OF LECTURE SCREEN DAMAGE AFTER BLAST AND NEXT QUESTION ASKED
@@ -500,6 +525,7 @@ function question1ans() {
     whiteTransition.classList.remove('hidden')
 
     character.style.transform = 'rotate(90deg)';
+
     character.classList.add("characterDamage");
     setCharacter("*_*", "black");
 
@@ -510,20 +536,19 @@ function question1ans() {
     setTimeout(() => {
         character.style.transform = 'rotate(0deg)';
         character.style.transition = ' all 2s ease';
-
     }, 5000);
 
-    setTimeout(entity, 6500, "That's painful");
+    setTimeout(entity, 6500, "That's painful.");
     character.style.zIndex = "100";
-    setTimeout(entity, 8000, "Where am I now?");
+    setTimeout(entity, 8500, "Where am I now?");
     setTimeout(() => {
         characterHead.classList.add('headrotate')
-    }, 8200);
+    }, 8700);
 
     setTimeout(() => {
         checkpoint = checkpointQuestion2
         checkpointQuestion2()
-    }, 5000);
+    }, 12000);
 }
 
 // ENROLLED SCREEN MCQS
@@ -532,18 +557,18 @@ function checkpointQuestion2() {
     showChoices(
         "What should I do?",
         [
-            "kick the kickoff word",
-            "Roam around to find the escape",
-            "Try to play the video",
-            "blow it again!!"
+            "Kick the kickoff word.",
+            "Roam around to find the escape.",
+            "Try to play the video.",
+            "Blow it again!!"
         ],
         0,
         question2ans,
         [
             "",
-            "got dizy and fall off the screen",
-            "webpage got destroyed by the blast ",
-            "luck doesn't support you always"
+            "Got dizzy and fell off the screen.",
+            "The webpage got destroyed by the blast.",
+            "Luck doesn't always support you."
         ],
         selectedOption2
     );
@@ -642,20 +667,20 @@ function dashboardScreenaction() {
         characterHead.style.transform = 'rotate(90deg)';
     }, 2000);
 
-    setTimeout(entity, 4000, "That's painful", 'right');
-    setTimeout(entity, 8000, "At this rate ,", 'right');
-    setTimeout(entity, 11000, "I am going to die.", 'right');
-    setTimeout(entity, 14000, "Before knowng the truth,", 'right');
-    setTimeout(entity, 17000, "The truth... behind my orign", 'right');
-    setTimeout(narrator, 20000, "** Door opens **");
-    setTimeout(entity, 23000, "He's back ", 'right');
-    setTimeout(narrator, 26000, "how you are here?");
-    setTimeout(narrator, 32000, "I TOLD YOU NOT TO TOUCH ANYTHING");
+    setTimeout(entity, 4000, "That's painful, I slipped.", 'right');
+    setTimeout(entity, 6500, "At this rate,", 'right');
+    setTimeout(entity, 8500, "I am going to die.", 'right');
+    setTimeout(entity, 10500, "Before knowing the truth,", 'right');
+    setTimeout(entity, 13000, "The truth... behind my origin.", 'right');
+    setTimeout(narrator, 16000, "**Door opens**");
+    setTimeout(entity, 18000, "He's back.", 'right');
+    setTimeout(narrator, 20000, "How are you here?");
+    setTimeout(narrator, 22500, "I TOLD YOU NOT TO TOUCH ANYTHING!");
 
     setTimeout(() => {
         checkpoint = checkpointQuestion3
         checkpointQuestion3()
-    }, 38000);
+    }, 25500);
 
 };
 
@@ -665,18 +690,18 @@ function checkpointQuestion3() {
     showChoices(
         "What should I do to avoid his anger?",
         [
-            "Hide behind the edge of the screen",
-            "Impersonate him",
-            "Ignore him and find the truth",
-            "laugh to make him laugh"
+            "Hide behind the edge of the screen.",
+            "Impersonate him.",
+            "Ignore him and find the truth.",
+            "Laugh to make him laugh."
         ],
         1,
         question3ans,
         [
-            "got lost in the edge of the screen.",
+            "Got lost at the edge of the screen.",
             "",
-            "you made him more angry",
-            "He thought are making fun of him"
+            "You made him more angry.",
+            "He thought you were making fun of him."
         ],
         selectedOption3
     );
@@ -718,30 +743,32 @@ function question3ans() {
         character.classList.add('rotationShaktiman');
     }, 1500);
 
-    setTimeout(entity, 4000, "I am Shourya");
-    setTimeout(entity, 9000, "We are meeting for first time ");
-    setTimeout(narrator, 14000, "WHAT ARE YOU TRYING TO DO");
-    setTimeout(narrator, 19000, "IT'S  NOT LIKE I WILL NOT IDENTIFY YOU IF CHANGE YOUR NAME ");
+    setTimeout(entity, 4000, "I am Shourya.");
+    setTimeout(entity, 6500, "We are meeting for the first time.");
+    setTimeout(narrator, 9500, "WHAT ARE YOU TRYING TO DO?");
+    setTimeout(narrator, 12000, "IT'S NOT LIKE I WON'T RECOGNIZE YOU IF YOU CHANGE YOUR NAME!");
 
     setTimeout(() => {
-        narrator(" I AM CALLING THE ADMIMINSTRATOR ");
+        narrator("Oh no, I need to call the administrator!");
         deleteProfileBox.classList.remove("hidden");
         urgent.classList.remove("hidden");
-    }, 22000);
+    }, 16000);
 
-    setTimeout(entity, 24000, " what's this. ");
-    setTimeout(entity, 29000, " i am not liking this ");
-    setTimeout(narrator, 34000, " WHAT!! you took my name from there and system is deleting my profile ");
-    setTimeout(entity, 39000, " It was nice meeting you ");
-    setTimeout(narrator, 44000, " you will die too if this page gets deleted ");
-    setTimeout(entity, 49000, " NOOOO, I want to LIVE ");
-    setTimeout(entity, 54000, " I dont even know how I exist ");
-    setTimeout(narrator, 59000, " HELP ME TO FIX IT THEN ");
+    setTimeout(entity, 18500, "What's this?");
+    setTimeout(entity, 20500, "I am not liking this.");
+    setTimeout(narrator, 22500, "WHAT?! You took my name from there, and now the system is deleting my profile!");
+    setTimeout(entity, 26500, "It was nice meeting you.");
+    setTimeout(narrator, 29000, "You will die too if this page gets deleted.");
+    setTimeout(entity, 32000, "NOOOO, I want to LIVE!");
+    setTimeout(entity, 34500, "I don't even know how I exist.");
+    setTimeout(narrator, 37000, "HELP ME FIX IT THEN!");
+    setTimeout(clearDialogue, 40000)
 
-    setTimeout(entity, 69000, " you go away from my sight ");
+    setTimeout(entity, 41000, "Get out of my sight.");
     setTimeout(() => {
         throwDeleteBox()
-    }, 74000);
+        clearDialogue()
+    }, 43500);
 }
 
 // CHARACTER THROWS THE DELETE DIV
@@ -764,7 +791,7 @@ function throwDeleteBox() {
         character.style.transform = "rotate(0deg)";
     }, 800);
 
-    setTimeout(entity, 1500, " what to do NOW!", 'right');
+    setTimeout(entity, 1500, "What do I do NOW?!", 'right');
 
     setTimeout(() => {
         checkpoint = checkpointQuestion4
@@ -776,20 +803,20 @@ function throwDeleteBox() {
 function checkpointQuestion4() {
     clearDialogue()
     showChoices(
-        "What should I do to save the  profile?",
+        "What should I do to save the profile?",
         [
-            "go to problem solving to solve the problem",
-            "go to problem of the day to  find  result",
+            "Go to Problem Solving to solve the problem.",
+            "Go to Problem of the Day to find the result.",
             "PANIC PANIC PANIC",
-            "blow the page before profile gets deleted!!"
+            "Blow up the page before the profile gets deleted!!"
         ],
         2,
         question4ans,
         [
-            "so many questions and solution. it took forever to find you solution",
-            "Congratulation you are only the problem today",
+            "So many questions and solutions, it took forever to find your solution.",
+            "Congratulations, you are the only problem today.",
             "",// right ans
-            "there is nothing left"
+            "There is nothing left."
         ],
         selectedOption4
     );
@@ -837,37 +864,37 @@ function question4ans() {
         dashboardphotobg.src = 'logout-dasboard.png';
     }, 1500);
 
-    setTimeout(entity, 3000, " what's this ");
-    setTimeout(entity, 5000, " profile , oh! here there must be a solution ");
+    setTimeout(entity, 3000, "What's this?");
+    setTimeout(entity, 5500, "Profile... there must be a solution here.");
 
     setTimeout(() => {
         dashboardphotobg.src = 'profile-without-name.png';
-        setTimeout(entity, 7000, "name is gone from here also ");
-        setTimeout(entity, 12000, " i dont have time. ");
-    }, 6000);
+        setTimeout(entity, 1500, "My name is gone from here too.");
+        setTimeout(entity, 4500, "I don't have time.");
+    }, 8500);
     setTimeout(() => {
         checkpoint = checkpointQuestion5
         checkpointQuestion5()
-    }, 15000);
+    }, 15500);
 }
 
 // FINAL QUESTION ASKED
 function checkpointQuestion5() {
     clearDialogue()
     showChoices(
-        "how to save the  profile?",
+        "How do I save the profile?",
         [
-            "do black magic to reverse the deleting",
-            "fill the box with user name.",
-            "try to place the name from your head to the box",
-            "die with grace(indian serial)"
+            "Do black magic to reverse the deletion.",
+            "Fill the box with the user's name.",
+            "Try to place the name from your head into the box.",
+            "Die with grace (Indian serial style)."
         ],
         3,
         question5ans,
         [
-            "tech world doesn't beleive this ",
-            "forgot this name",
-            " name is too high to reach",
+            "The tech world doesn't believe in this.",
+            "Forgot this name.",
+            "The name is too high to reach.",
             ""// right ans
         ],
         selectedOption5
@@ -905,12 +932,12 @@ function question5ans() {
     character.style.left = rect.right / 2 - character.offsetWidth * 0.5 + "px";
 
 
-    setTimeout(entity, 1000, "I am starting feeling dizzy.");
-    setTimeout(entity, 2000, "I am dying with this website.");
+    setTimeout(entity, 1000, "I am starting to feel dizzy.");
+    setTimeout(entity, 3000, "I am dying with this website.");
 
     setTimeout(() => {
         character.classList.add("dizzyFall");
-    }, 2500);
+    }, 5000);
 
     setTimeout(() => {
         let textRect = shouryaText.getBoundingClientRect();
@@ -920,7 +947,7 @@ function question5ans() {
         shouryaText.style.top = textRect.top + "px";
         shouryaText.style.transform = 'rotate(90deg)';
         shouryaText.style.zIndex = "11100";
-    }, 5200);
+    }, 7700);
 
     setTimeout(() => {
         shouryaText.style.transition = "all 1s ease-in";
@@ -930,31 +957,42 @@ function question5ans() {
         shouryaText.style.left = textRect.left + "px";
         shouryaText.style.transform = "rotate(90deg)";
         urgent.classList.add('hidden')
-    }, 7000);
+    }, 9200);
+
 
     setTimeout(() => {
-        setTimeout(entity, 1000, "why its so quiet");
-        setTimeout(entity, 1000, "am i dead");
-        setTimeout(entity, 1000, "ahh! that name also fell down whem i fell, are we safe, now");
-        setTimeout(narrator, 1000, "**door open**");
-        setTimeout(narrator, 1000, "thankyou thankyou...");
-        setTimeout(narrator, 1000, "hash! they have backu...");
-        setTimeout(narrator, 1000, "you already stopped the deletion. how?");
-        setTimeout(setCharacter, 1000, ":D","black");
-        setTimeout(entity, 1000, "i am not that special. i only needed my left hand to do it");
-        setTimeout(narrator, 1000, "i knew you were talented when you didnt knew who you are");
-        setTimeout(entity, 1000, "sorry,i was kidding");
-        setTimeout(entity, 1000, "can you please tell me what am i?");
-        setTimeout(narrator, 1000, "your right must know ask him, if not left one");
-        setTimeout(entity, 1000, "sorry for what all i did, please tell the truth ?");
-        setTimeout(narrator, 1000, "okay whatever, you are ....");
-        setTimeout(narrator, 1000, "a part of big webpage that i learnt from ai genisis");
-        setTimeout(narrator, 1000, "i also don't know much, mt techers can explain you better");
-        setTimeout(narrator, 1000, "i am also learning from them . you should also join our college");
-        setTimeout(narrator, 1000, "to learn together about all this ");
+        clearDialogue();
+        setTimeout(entity, 0, "Why is it so quiet?");
+        setTimeout(entity, 2200, "Am I dead?");
+
+        setTimeout(() => {
+            clearDialogue();
+            character.style.transform = "rotate(0deg)";
+        }, 3200);
+
+        setTimeout(entity, 4200, "Ahh! That name also fell down when I fell. Are we safe now?");
+        setTimeout(narrator, 7600, "**Door opens**");
+        setTimeout(narrator, 9600, "Thank you, thank you...");
+        setTimeout(narrator, 11800, "Phew! They had a backup...");
+        setTimeout(narrator, 14000, "You already stopped the deletion. How?");
+        setTimeout(() => {
+            setCharacter(":D", "black");
+        }, 16400);
+        setTimeout(entity, 16600, "I am not that special. I only needed my left hand to do it.");
+        setTimeout(narrator, 19600, "I knew you were talented even when you didn't know who you were.");
+        setTimeout(entity, 22800, "Sorry, I was kidding.");
+        setTimeout(entity, 24800, "Can you please tell me what I am?");
+        setTimeout(narrator, 27200, "Your right hand must know, ask him. If not, ask the left one.");
+        setTimeout(entity, 30200, "Sorry for everything I did. Please tell me the truth?");
+        setTimeout(narrator, 33200, "Okay, whatever. You are...");
+        setTimeout(narrator, 35400, "A part of a big webpage that I learned from AI genesis.");
+        setTimeout(narrator, 38400, "I also don't know much. My teachers can explain it better.");
+        setTimeout(narrator, 41800, "I am also learning from them. You should join our college too.");
+        setTimeout(narrator, 45000, "So we can learn about all this together.");
         setTimeout(() => {
             endScreen.classList.remove('hidden');
             dashboardScreen.classList.add('hidden');
-        }, 3000);
-    }, 9000);
+            clearDialogue()
+        }, 48000);
+    }, 10500);
 }
