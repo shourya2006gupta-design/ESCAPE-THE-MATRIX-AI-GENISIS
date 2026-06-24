@@ -521,6 +521,7 @@ function question1ans() {
     character.classList.remove("hidden");
     enrolledScreen.classList.remove("hidden");
     character.classList.add("absolute");
+    character.classList.remove("zindex");
 
     whiteTransition.classList.remove('hidden')
 
